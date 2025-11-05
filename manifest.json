@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+    "name": "Google Gemini Toggle",
+    "version": "1.0",
+    "description": "Adds toggle switch for Gemini results on Google searches",
+    "icons": {
+        "48": "icons/gemini-toggle-48.png",
+        "96": "icons/gemini-toggle-96.png"
+    },
+    "permissions": [
+        "webRequest",
+        "webRequestBlocking",
+        "*://*.google.com/search*"
+    ],
+    "background": {
+        "scripts": [
+            "google-gemini-toggle.js"
+        ]
+    }
+}
