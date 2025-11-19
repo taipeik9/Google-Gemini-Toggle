@@ -1,0 +1,97 @@
+/* 
+Colours from the Google News Color Palette:
+https://partnermarketinghub.withgoogle.com/brands/google-news/visual-identity/color-palette/
+*/
+.toggle {
+    --active-ball-colour: #D2E3FC;
+    --inactive-ball-colour: #F1F3F4;
+    --active-bar-colour: #174EA6;
+    --inactive-bar-colour: #9AA0A6;
+    --hover-circle-colour: #202124;
+}
+
+.toggle {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    margin-left: 15px;
+    width: 50px;
+    height: 15px;
+    background-color: var(--inactive-bar-colour);
+    border-radius: 25px;
+    position: relative;
+    transition: all 0.3s ease;
+    z-index: 0;
+}
+
+.toggle:hover {
+    cursor: pointer;
+}
+
+.toggle:checked {
+    background-color: var(--active-bar-colour);
+}
+
+/* using the before pseudoclass in a "hackey" way to overlay the circle on top of the bar */
+.toggle::before {
+    content: "";
+    margin-top: -5px;
+    background-color: var(--inactive-ball-colour);
+    z-index: 2;
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    border-radius: 25px;
+    top: 0;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.toggle:checked::before {
+    left: 50%;
+    background-color: var(--active-ball-colour);
+}
+
+/* the after pseudoclass is used for the larger circle hover */
+.toggle::after {
+    content: "";
+    background-color: var(--hover-circle-colour);
+    opacity: 0%;
+    z-index: 1;
+    margin-top: -5px;
+
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    border-radius: 25px;
+    top: 0;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.toggle:checked::after {
+    left: 50%;
+}
+
+.toggle:hover::after {
+    opacity: 50%;
+    transform: scale(150%);
+}
+
+.toggle-container {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.gemini-div {
+    max-height: 0px !important;
+    overflow: hidden !important;
+    transition: all 0.5s ease;
+}
+
+.gemini-div.reveal {
+    max-height: 1500px !important;
+}

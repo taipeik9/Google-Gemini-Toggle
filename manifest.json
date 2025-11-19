@@ -10,11 +10,32 @@
     "permissions": [
         "webRequest",
         "webRequestBlocking",
-        "*://*.google.com/search*"
+        "*://*.google.com/search*",
+        "storage"
     ],
     "background": {
         "scripts": [
-            "google-gemini-toggle.js"
+            "googleGeminiToggle.js"
         ]
-    }
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.google.com/search*"
+            ],
+            "js": [
+                "toggleContent.js"
+            ],
+            "run_at": "document_idle"
+        },
+        {
+            "matches": [
+                "*://*.google.com/search*"
+            ],
+            "js": [
+                "messaging.js"
+            ],
+            "run_at": "document_start"
+        }
+    ]
 }
