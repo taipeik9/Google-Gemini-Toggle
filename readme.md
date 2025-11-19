@@ -10,6 +10,8 @@ So, there is now a toggle switch for the AI overview, and it remembers your opti
 
 The processes communicate via messaging. When a user toggles Gemini, a function is called on the injected script then a message is sent to the messaging content script, and then another message is sent to the background script, which checks the state and reverses it. Then the messaging queue happens again, but backwards, to update the injected script with the current state of Gemini Toggle. So, when a user opens a page with Gemini enabled or disabled there will be no stutter with their experience.
 
+Also, some of the day was creating the toggle button bc css is not my strong suit haha. I followed a tutorial online and copied the look of the material UI toggle switches.
+
 TODO
 - [x] Toggle Gemini results back on
 - [ ] Figure out "people also ask" section
