@@ -20,5 +20,8 @@ TODO
   - [ ] If I'm able to do the above, I would love it so much if the on-page toggle could actually request the service, so its blocked unless someone checks that box
 - [x] "toggle" icon for when its off/on.
 - [x] Store user option in local storage.
-- [ ] figure out max-height, summaries get cut off
 - [ ] determine ai div without id name? (future "proofing")
+
+### November 20th tasks completed
+- [x] figure out max-height, summaries get cut off
+- [ ] fix bug -> gemini enabled on two tabs, disable and then refresh. The second tab will have the summary removed, but the toggle button will still be checked. I update the check on reload in googleGeminiToggle.js but for some reason its not persisting. 
