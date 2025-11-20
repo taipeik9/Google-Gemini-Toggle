@@ -15,7 +15,7 @@ https://partnermarketinghub.withgoogle.com/brands/google-news/visual-identity/co
     -webkit-appearance: none;
     -moz-appearance: none;
 
-    margin-left: 15px;
+    margin-left: 10px;
     width: 50px;
     height: 15px;
     background-color: var(--inactive-bar-colour);
@@ -74,7 +74,7 @@ https://partnermarketinghub.withgoogle.com/brands/google-news/visual-identity/co
     left: 50%;
 }
 
-.toggle:hover::after {
+.toggle-container:hover > .toggle::after {
     opacity: 50%;
     transform: scale(150%);
 }
@@ -84,14 +84,23 @@ https://partnermarketinghub.withgoogle.com/brands/google-news/visual-identity/co
     margin-bottom: 10px;
     display: flex;
     align-items: center;
+    width: fit-content;
+}
+
+.toggle-container:hover {
+    cursor: pointer;
 }
 
 .gemini-div {
-    max-height: 0px !important;
-    overflow: hidden !important;
-    transition: all 0.5s ease;
+    display: grid; 
+    grid-template-rows: 0fr;
+    transition: 250ms grid-template-rows ease;
+}
+
+.gemini-div > div {
+    overflow: hidden;
 }
 
 .gemini-div.reveal {
-    max-height: 1500px !important;
+    grid-template-rows: 1fr !important;
 }

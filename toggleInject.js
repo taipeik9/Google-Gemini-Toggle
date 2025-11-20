@@ -1,6 +1,8 @@
 const STORAGE_KEY = "geminiEnabled";
 
-document.querySelector(".toggle").addEventListener("click", toggleResults);
+document
+    .querySelector(".toggle-container")
+    .addEventListener("click", toggleResults);
 function toggleResults() {
     window.postMessage(
         {

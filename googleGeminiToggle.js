@@ -37,7 +37,6 @@ const STORAGE_KEY = "geminiEnabled";
 
         const geminiEnabled = (await browser.storage.local.get(STORAGE_KEY))
             .geminiEnabled;
-        console.log(geminiEnabled);
 
         let responseData = "";
 
@@ -67,14 +66,22 @@ const STORAGE_KEY = "geminiEnabled";
             }
             if (geminiParent) {
                 const switchDiv = document.createElement("div");
-                switchDiv.innerHTML = `
-                    <div class="toggle-container">
-                        <span>Gemini Results</span>
-                        <input type="checkbox" class="toggle" ${
-                            geminiEnabled ? "checked" : ""
-                        }>
-                    </div>
-                `;
+                const toggleContainer = document.createElement("div");
+                toggleContainer.classList.add("toggle-container");
+
+                const title = document.createElement("span");
+                title.textContent = "Gemini Results";
+                toggleContainer.appendChild(title);
+
+                const toggle = document.createElement("input");
+                toggle.type = "checkbox";
+                toggle.classList.add("toggle");
+                toggle.checked = geminiEnabled;
+
+                console.log("toggle.checked: ", toggle.checked);
+                toggleContainer.appendChild(toggle);
+
+                switchDiv.appendChild(toggleContainer);
                 geminiParent.insertBefore(switchDiv, geminiDiv);
             } else {
                 console.error("Could not find Gemini parent div");
