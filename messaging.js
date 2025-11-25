@@ -5,7 +5,7 @@ window.addEventListener("message", (e) => {
 
     browser.runtime.sendMessage({
         fromContent: true,
-        action: e.data.action,
+        newState: e.data?.newState,
     });
 });
 

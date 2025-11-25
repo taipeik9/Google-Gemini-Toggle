@@ -1,13 +1,18 @@
+const STORAGE_KEY = "geminiEnabled";
+
 document
     .querySelector(".toggle-container")
     .addEventListener("click", toggleResults);
 
+const toggle = document.querySelector(".toggle");
+
 function toggleResults() {
+    const checked = window.sessionStorage.getItem(STORAGE_KEY);
     window.postMessage(
         {
             source: "gemini-toggle",
             fromPage: true,
-            action: "TOGGLE_GEMINI",
+            newState: !(checked === "true"),
         },
         "*"
     );
@@ -20,6 +25,7 @@ window.addEventListener("message", (e) => {
 
     const toggle = document.querySelector(".toggle");
     const geminiDiv = document.querySelector("#eKIzJc");
+    window.sessionStorage.setItem(STORAGE_KEY, e.data.geminiEnabled);
 
     if ((toggle.checked = e.data.geminiEnabled)) {
         geminiDiv.classList.add("reveal");
@@ -33,7 +39,6 @@ window.postMessage(
     {
         source: "gemini-toggle",
         fromPage: true,
-        action: "CHECK_GEMINI",
     },
     "*"
 );

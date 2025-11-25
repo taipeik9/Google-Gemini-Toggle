@@ -7,16 +7,12 @@ const STORAGE_KEY = "geminiEnabled";
     }
     window.hasRun = true;
 
-    const sendMessage = async (tabId, action) => {
+    const sendMessage = async (tabId, newState) => {
         let state = (await browser.storage.local.get(STORAGE_KEY))
             .geminiEnabled;
-        if (action === "TOGGLE_GEMINI") {
-            const newToggleState = !(
-                await browser.storage.local.get(STORAGE_KEY)
-            ).geminiEnabled;
-
-            await browser.storage.local.set({ geminiEnabled: newToggleState });
-            state = newToggleState;
+        if (newState !== undefined) {
+            await browser.storage.local.set({ geminiEnabled: newState });
+            state = newState;
         }
         browser.tabs.sendMessage(tabId, {
             fromBackground: true,
@@ -26,7 +22,7 @@ const STORAGE_KEY = "geminiEnabled";
 
     browser.runtime.onMessage.addListener(async (msg, sender) => {
         if (msg.fromContent) {
-            sendMessage(sender.tab.id, msg.action);
+            sendMessage(sender.tab.id, msg.newState);
         }
     });
 
