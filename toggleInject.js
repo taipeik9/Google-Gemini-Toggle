@@ -1,8 +1,7 @@
-const STORAGE_KEY = "geminiEnabled";
-
 document
     .querySelector(".toggle-container")
     .addEventListener("click", toggleResults);
+
 function toggleResults() {
     window.postMessage(
         {
@@ -28,3 +27,13 @@ window.addEventListener("message", (e) => {
         geminiDiv.classList.remove("reveal");
     }
 });
+
+// check the toggle state on load (works because toggleContent runs on document idle)
+window.postMessage(
+    {
+        source: "gemini-toggle",
+        fromPage: true,
+        action: "CHECK_GEMINI",
+    },
+    "*"
+);

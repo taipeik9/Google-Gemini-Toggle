@@ -7,20 +7,26 @@ const STORAGE_KEY = "geminiEnabled";
     }
     window.hasRun = true;
 
-    const sendMessage = async (tabId) => {
-        const newToggleState = !(await browser.storage.local.get(STORAGE_KEY))
+    const sendMessage = async (tabId, action) => {
+        let state = (await browser.storage.local.get(STORAGE_KEY))
             .geminiEnabled;
+        if (action === "TOGGLE_GEMINI") {
+            const newToggleState = !(
+                await browser.storage.local.get(STORAGE_KEY)
+            ).geminiEnabled;
 
+            await browser.storage.local.set({ geminiEnabled: newToggleState });
+            state = newToggleState;
+        }
         browser.tabs.sendMessage(tabId, {
             fromBackground: true,
-            geminiEnabled: newToggleState,
+            geminiEnabled: state,
         });
-        await browser.storage.local.set({ geminiEnabled: newToggleState });
     };
 
     browser.runtime.onMessage.addListener(async (msg, sender) => {
         if (msg.fromContent) {
-            await sendMessage(sender.tab.id);
+            sendMessage(sender.tab.id, msg.action);
         }
     });
 
@@ -78,7 +84,6 @@ const STORAGE_KEY = "geminiEnabled";
                 toggle.classList.add("toggle");
                 toggle.checked = geminiEnabled;
 
-                console.log("toggle.checked: ", toggle.checked);
                 toggleContainer.appendChild(toggle);
 
                 switchDiv.appendChild(toggleContainer);
