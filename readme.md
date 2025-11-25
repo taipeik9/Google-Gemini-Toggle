@@ -24,7 +24,9 @@ TODO
 
 ### November 20th tasks completed
 - [x] figure out max-height, summaries get cut off
-- [ ] fix bug -> gemini enabled on two tabs, disable and then refresh. The second tab will have the summary removed, but the toggle button will still be checked. I update the check on reload in googleGeminiToggle.js but for some reason its not persisting. 
+
+### November 25th completed!
+- [x] fix bug -> gemini enabled on two tabs, disable and then refresh. The second tab will have the summary removed, but the toggle button will still be checked. I update the check on reload in googleGeminiToggle.js but for some reason its not persisting. 
 
 ### November 21 added notes
 - [ ] add dark mode
