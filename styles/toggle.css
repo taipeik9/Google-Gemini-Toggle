@@ -81,10 +81,16 @@ https://partnermarketinghub.withgoogle.com/brands/google-news/visual-identity/co
 
 .toggle-container {
     margin-top: 20px;
-    margin-bottom: 10px;
     display: flex;
     align-items: center;
     width: fit-content;
+
+    /* prevent the toggle button text from being highlighted */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
 .toggle-container:hover {
