@@ -1,6 +1,6 @@
 # Google Gemini Toggle
 
-Adds a toggle on Google searches which enables / disables the Gemini results.
+Adds a toggle on Google searches which enables / disables the Gemini results. Version 1.0
 
 ## Quick Demonstration
 
@@ -24,6 +24,13 @@ Furthermore, most of the extensions which remove it all together just remove the
 
 ## Some "Weirdness" with the Implementation
 
-To remove the stutter, instead of removing the overview div when
+To remove the stutter, instead of removing the overview div when the document loads (like most of the Gemini removal extensions do), I patch the incoming document. I started by parsing the HTML string in JavaScript and then appending the necessary divs, however, this created a strange effect on only a select few pages. It would push the footer up really high and make a massive space right in the middle of the results. I tried to change around the styling but nothing would help. Even if I parsed the document, did nothing to it and then sent the ".outerHTML" or ".innerHTML" to the user it would still create this weird effect. So, I changed my approach to just modify the string directly. That's why there's some weird string modification helper functions which iterate over the HTML string and modify it if it finds certain ids.
+
+So, its a bit of a "hackey" solution and I haven't tested it that extensively, however, it works well where I have tested it so far! I could have just left it with the easier solution, but I wanted to cover all edge cases.
 
 ## Future Changes
+Here are some features I want to implement in the future
+
+- [ ] Stop the search from requesting the AI service unless its toggled on
+- [ ] Add a form for users to submit bugs or feature requests
+- [ ] Actually add it to the Firefox web store
