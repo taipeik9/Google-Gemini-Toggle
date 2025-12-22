@@ -3,8 +3,9 @@
 Adds a toggle on Google searches which enables / disables the Gemini results. Version 1.0
 
 ## Quick Demonstration
+As you can see, its styled nicely and whether the user wants Gemini toggled on or off is stored in local storage.
 
-
+https://github.com/user-attachments/assets/07eda88c-1e9b-4011-99fa-3dab44426799
 
 ## To Run Locally
 
