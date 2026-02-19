@@ -17,7 +17,7 @@ const STORAGE_KEY = "geminiEnabled";
     // helper function for removing entire tag and all children by id or class name
     const removeTag = (str, tagIdx, tag) => {
         // no tag found
-        if (tagIdx == -1) {
+        if (tagIdx === -1) {
             return [str, null];
         }
 
@@ -155,7 +155,7 @@ const STORAGE_KEY = "geminiEnabled";
 
         // fetching the sheet from another file to avoid this file being cluttered
         const styleFetch = await fetch(
-            browser.runtime.getURL("styles/toggle.css")
+            browser.runtime.getURL("styles/toggle.css"),
         );
         const styleSheet = await styleFetch.text();
 
@@ -169,8 +169,8 @@ const STORAGE_KEY = "geminiEnabled";
         };
 
         filter.onstop = () => {
+            // find ai overview div and replace it with toggle
             const aiIdNameIdx = responseData.indexOf('id="eKIzJc"');
-
             if (aiIdNameIdx !== -1) {
                 let classesToInsert = "gemini-div ";
                 if (geminiEnabled) {
@@ -180,7 +180,7 @@ const STORAGE_KEY = "geminiEnabled";
                 responseData = insertClasses(
                     responseData,
                     aiIdNameIdx,
-                    classesToInsert
+                    classesToInsert,
                 );
                 const styleTag = document.createElement("style");
                 styleTag.textContent = styleSheet;
@@ -188,21 +188,23 @@ const STORAGE_KEY = "geminiEnabled";
                 responseData = insertString(
                     headEndIdx,
                     responseData,
-                    styleTag.outerHTML
+                    styleTag.outerHTML,
                 );
 
                 responseData = insertToggle(
                     responseData,
                     responseData.indexOf('id="eKIzJc"'), // this is recalculated as the index could have moved
-                    geminiEnabled
+                    geminiEnabled,
                 );
             }
+
+            // find "people also ask" AI Overviews and remove them
 
             // remove ai mode div
             responseData = removeTag(
                 responseData,
                 responseData.indexOf('class="olrp5b"'),
-                "div"
+                "div",
             );
 
             filter.write(encoder.encode(responseData));
@@ -217,6 +219,6 @@ const STORAGE_KEY = "geminiEnabled";
             urls: ["https://www.google.com/search*"],
             types: ["main_frame"],
         },
-        ["blocking"]
+        ["blocking"],
     );
 })();
